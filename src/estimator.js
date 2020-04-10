@@ -12,10 +12,11 @@ const data = {
     totalHospitalBeds: 1380614
 }
 
-const covid19ImpactEstimator = (data) => {
-    const impact = {};
-    const severeImpact = {};
+const impact = {};
+const severeImpact = {};
 
+
+const covid19ImpactEstimator = (data) => {
     // CHALLENGE ONE 
 
     // number of estimated infected people given the reported cases in the data
@@ -59,11 +60,12 @@ const covid19ImpactEstimator = (data) => {
     severeImpact.casesForVentilatorsByRequestedTime = 0.02 * severeImpact.infectionsByRequestedTime;
 
     // impact on the economy
-    impact.dollarInFlight = impact.infectionsByRequestedTime * data.region.avgDailyIncomePopulation * data.region.avgDailyIncomeInUSD * days;
-    severeImpact.dollarInFlight = severeImpact.infectionsByRequestedTime * data.region.avgDailyIncomePopulation * data.region.avgDailyIncomeInUSD * days;
+    impact.dollarsInFlight = (impact.infectionsByRequestedTime * data.region.avgDailyIncomePopulation * data.region.avgDailyIncomeInUSD * days).toFixed(2);
+    severeImpact.dollarsInFlight = (severeImpact.infectionsByRequestedTime * data.region.avgDailyIncomePopulation * data.region.avgDailyIncomeInUSD * days).toFixed(2);
 
-    return data, impact, severeImpact;
+    return { data, impact, severeImpact };
 };
 
+covid19ImpactEstimator(data);
 
 export default covid19ImpactEstimator;
